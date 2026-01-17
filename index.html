@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Francisco Javier Boga Rioja - Desarrollador Full Stack</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1e40af;
+            --secondary: #0f172a;
+            --accent: #06b6d4;
+            --text: #334155;
+            --text-light: #64748b;
+            --bg: #ffffff;
+            --bg-light: #f8fafc;
+            --success: #10b981;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--bg);
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" fill="none"/><circle cx="50" cy="50" r="40" fill="rgba(255,255,255,0.1)"/></svg>');
+            opacity: 0.1;
+        }
+
+        .header-content {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        .header .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            opacity: 0.95;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        .header .tagline {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease-out 0.6s both;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav {
+            background: var(--secondary);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .nav a:hover {
+            background: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: var(--secondary);
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 2px;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .about-card {
+            background: var(--bg-light);
+            padding: 2rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--primary);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .about-card:hover {
+            transform: translateX(10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .about-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 3rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, var(--primary), var(--accent));
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            padding-left: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -3.6rem;
+            top: 0;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: var(--primary);
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px var(--primary);
+        }
+
+        .timeline-item h3 {
+            color: var(--primary);
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-item .company {
+            color: var(--text-light);
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .timeline-item .period {
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: inline-block;
+            background: rgba(6, 182, 212, 0.1);
+            padding: 0.3rem 0.8rem;
+            border-radius: 5px;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .skill-category {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+
+        .skill-category h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .skill-tag {
+            display: inline-block;
+            background: var(--bg-light);
+            padding: 0.4rem 0.8rem;
+            margin: 0.3rem;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s;
+        }
+
+        .skill-tag:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border-top: 4px solid var(--primary);
+            transition: all 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .project-card h3 {
+            color: var(--primary);
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-meta {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .project-badge {
+            background: var(--accent);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 5px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .education-grid {
+            display: grid;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .education-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border-left: 4px solid var(--success);
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .education-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--success), #059669);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+        }
+
+        .education-card h3 {
+            color: var(--secondary);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .education-card .institution {
+            color: var(--text-light);
+            font-weight: 600;
+        }
+
+        .education-card .year {
+            color: var(--success);
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            border-radius: 15px;
+            margin: 4rem 0;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: white;
+            color: var(--primary);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: var(--primary);
+        }
+
+        .footer {
+            background: var(--secondary);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 2rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-light);
+            font-weight: 600;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            .header .subtitle {
+                font-size: 1.2rem;
+            }
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+            .nav-content {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <h1>Francisco Javier Boga Rioja</h1>
+            <p class="subtitle">Desarrollador Full Stack Java | Especialista en Automatización Industrial</p>
+            <p class="tagline">36+ años de experiencia combinando desarrollo de software, administración de sistemas y automatización industrial. Apasionado por la tecnología, el IoT y la mejora continua.</p>
+            <div class="contact-info">
+                <div class="contact-item">📧 javier.boga@yahoo.es</div>
+                <div class="contact-item">📱 640 609 402</div>
+                <div class="contact-item">📍 Miraflores de la Sierra, Madrid</div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="nav">
+        <div class="nav-content">
+            <a href="#sobre-mi">Sobre Mí</a>
+            <a href="#experiencia">Experiencia</a>
+            <a href="#habilidades">Habilidades</a>
+            <a href="#proyectos">Proyectos</a>
+            <a href="#formacion">Formación</a>
+            <a href="#contacto">Contacto</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Estadísticas -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">36+</div>
+                <div class="stat-label">Años de Experiencia</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">5+</div>
+                <div class="stat-label">Años en Desarrollo Java</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">3</div>
+                <div class="stat-label">Titulaciones Superiores</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">20+</div>
+                <div class="stat-label">Tecnologías Dominadas</div>
+            </div>
+        </div>
+
+        <!-- Sobre Mí -->
+        <section id="sobre-mi" class="section">
+            <h2 class="section-title">Mi Historia Profesional</h2>
+            <div class="about-grid">
+                <div class="about-card">
+                    <h3>🎯 Perfil Multitécnico</h3>
+                    <p>Ingeniero con formación híbrida en electrónica, automatización industrial y desarrollo de software. Mi trayectoria única combina el mundo físico de la automatización con el digital del desarrollo Full Stack.</p>
+                </div>
+                <div class="about-card">
+                    <h3>🚀 Transición al Desarrollo</h3>
+                    <p>Después de más de 20 años en automatización industrial, he consolidado mi perfil como desarrollador Java Full Stack, especializándome en Spring Boot, microservicios y arquitecturas cloud.</p>
+                </div>
+                <div class="about-card">
+                    <h3>📚 Formación Continua</h3>
+                    <p>Comprometido con el aprendizaje continuo: DAM (2024), ASIR (2022), y actualmente cursando especialización en Inteligencia Artificial y Big Data. Cada día es una oportunidad para mejorar.</p>
+                </div>
+                <div class="about-card">
+                    <h3>💡 Visión Integral</h3>
+                    <p>Mi experiencia en automatización me proporciona una perspectiva única para entender sistemas complejos, resolver problemas de infraestructura y desarrollar soluciones de software robustas y escalables.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experiencia -->
+        <section id="experiencia" class="section">
+            <h2 class="section-title">Experiencia Profesional</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h3>Programador Java Full Stack</h3>
+                    <div class="company">Dominion Industry & Infrastructures</div>
+                    <span class="period">Junio 2020 - Actualidad</span>
+                    <p><strong>Responsabilidades clave:</strong></p>
+                    <ul>
+                        <li>Desarrollo de aplicaciones web Java EE/Jakarta con arquitectura de microservicios</li>
+                        <li>Implementación de APIs RESTful y servicios HTTP con Spring Boot</li>
+                        <li>Gestión de persistencia con JPA/Hibernate y bases de datos SQL/NoSQL</li>
+                        <li>Implementación de seguridad (OAuth2, JWT, KeyCloak, API Gateway)</li>
+                        <li>Integración de sistemas de mensajería (JMS, RabbitMQ, Kafka)</li>
+                        <li>Despliegue en plataformas cloud (Heroku, Google Cloud, AWS, Azure, OpenShift)</li>
+                        <li>CI/CD con GitHub, Jenkins y Maven</li>
+                    </ul>
+                </div>
+
+                <div class="timeline-item">
+                    <h3>Desarrollador/Mantenedor Automatización Industrial</h3>
+                    <div class="company">Dominion Industry & Infrastructures</div>
+                    <span class="period">Mayo 2016 - Junio 2020</span>
+                    <p><strong>Logros destacados:</strong></p>
+                    <ul>
+                        <li>Desarrollo de herramientas de diagnóstico y monitorización para optimización del mantenimiento</li>
+                        <li>Creación de aplicativos intranet para gestión de información estadística de producción</li>
+                        <li>Soporte Hot Line de líneas de automatización</li>
+                        <li>Mejora de herramientas de administración del negocio</li>
+                    </ul>
+                </div>
+
+                <div class="timeline-item">
+                    <h3>Técnico de Sistemas - Jefe de Equipo</h3>
+                    <div class="company">Dominion Industry & Infrastructures</div>
+                    <span class="period">Enero 2015 - Mayo 2016</span>
+                    <p>Gestión de equipos de mantenimiento de instalaciones automatizadas. Coordinación de tareas preventivas, correctivas y predictivas.</p>
+                </div>
+
+                <div class="timeline-item">
+                    <h3>Analista Programador</h3>
+                    <div class="company">Abantia - Proyecto Correos</div>
+                    <span class="period">Febrero 2004 - Diciembre 2004</span>
+                    <p><strong>Proyecto portal corporativo nivel intranet:</strong></p>
+                    <ul>
+                        <li>Desarrollo en arquitectura MVC de tres capas</li>
+                        <li>Frontend: HTML, JavaScript, CSS, JSP</li>
+                        <li>Backend: Java con reglas de negocio en SQL Server</li>
+                        <li>Administración SQL Server y servidor Apache con contenedor JRUN</li>
+                    </ul>
+                </div>
+
+                <div class="timeline-item">
+                    <h3>Técnico de Sistemas</h3>
+                    <div class="company">Dominion Industry & Infrastructures</div>
+                    <span class="period">Enero 2001 - Diciembre 2003</span>
+                    <p>Jefe de Equipo de mantenimiento de instalaciones automatizadas. Supervisión de sistemas implantados y coordinación de tareas técnicas.</p>
+                </div>
+
+                <div class="timeline-item">
+                    <h3>Jefe de Turno</h3>
+                    <div class="company">SDP - Sociedad Estatal de Correos</div>
+                    <span class="period">Febrero 1988 - Diciembre 2000</span>
+                    <p>Puesta a punto de maquinaria industrial automatizada. Sistemas de automatización de clasificación automática de correspondencia.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Habilidades Técnicas -->
+        <section id="habilidades" class="section">
+            <h2 class="section-title">Stack Tecnológico</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>☕ Backend</h3>
+                    <div class="skill-tag">Java SE/EE (8-17)</div>
+                    <div class="skill-tag">Spring Boot</div>
+                    <div class="skill-tag">Spring MVC</div>
+                    <div class="skill-tag">Spring Security</div>
+                    <div class="skill-tag">Spring Data</div>
+                    <div class="skill-tag">Hibernate/JPA</div>
+                    <div class="skill-tag">RESTful APIs</div>
+                    <div class="skill-tag">Microservicios</div>
+                    <div class="skill-tag">WebSockets</div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>🎨 Frontend</h3>
+                    <div class="skill-tag">HTML5/CSS3</div>
+                    <div class="skill-tag">JavaScript/TypeScript</div>
+                    <div class="skill-tag">Angular</div>
+                    <div class="skill-tag">React</div>
+                    <div class="skill-tag">jQuery</div>
+                    <div class="skill-tag">Bootstrap</div>
+                    <div class="skill-tag">Thymeleaf</div>
+                    <div class="skill-tag">JSP/JSF</div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>🗄️ Bases de Datos</h3>
+                    <div class="skill-tag">MySQL/MariaDB</div>
+                    <div class="skill-tag">PostgreSQL</div>
+                    <div class="skill-tag">Oracle</div>
+                    <div class="skill-tag">SQL Server</div>
+                    <div class="skill-tag">MongoDB</div>
+                    <div class="skill-tag">PL/SQL</div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>☁️ Cloud & DevOps</h3>
+                    <div class="skill-tag">AWS</div>
+                    <div class="skill-tag">Azure</div>
+                    <div class="skill-tag">Google Cloud</div>
+                    <div class="skill-tag">OpenShift</div>
+                    <div class="skill-tag">Docker</div>
+                    <div class="skill-tag">Kubernetes</div>
+                    <div class="skill-tag">Jenkins</div>
+                    <div class="skill-tag">Git/GitHub</div>
+                    <div class="skill-tag">Maven</div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>🔄 Mensajería & Eventos</h3>
+                    <div class="skill-tag">Kafka</div>
+                    <div class="skill-tag">RabbitMQ</div>
+                    <div class="skill-tag">JMS</div>
+                    <div class="skill-tag">AMQP</div>
+                    <div class="skill-tag">gRPC</div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>🔐 Seguridad</h3>
+                    <div class="skill-tag">OAuth 2.0</div>
+                    <div class="skill-tag">JWT</div>
+                    <div class="skill-tag">KeyCloak</div>
+                    <div class="skill-tag">Spring Security</div>
+                    <div class="skill-tag">API Gateway</div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>💻 Sistemas Operativos</h3>
+                    <div class="skill-tag">Linux Server</div>
+                    <div class="skill-tag">Windows Server</div>
+                    <div class="skill-tag">Administración de redes</div>
+                    <div class="skill-tag">Virtualización (VMware)</div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>🛠️ Herramientas & IDEs</h3>
+                    <div class="skill-tag">IntelliJ IDEA</div>
+                    <div class="skill-tag">Eclipse</div>
+                    <div class="skill-tag">VS Code</div>
+                    <div class="skill-tag">NetBeans</div>
+                    <div class="skill-tag">Android Studio</div>
+                    <div class="skill-tag">PyCharm</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Proyectos Destacados -->
+        <section id="proyectos" class="section">
+            <h2 class="section-title">Proyectos Destacados</h2>
+            
+            <div class="project-card">
+                <h3>Sistema Informativo Maquinaria de Clasificación TOP 2000</h3>
+                <div class="project-meta">
+                    <span class="project-badge">Proyecto Final DAM</span>
+                    <span class="project-badge">Full Stack</span>
+                    <span class="project-badge">2024</span>
+                </div>
+                <p><strong>Descripción:</strong> Aplicación web SPA completa para visualización de información diagnóstica y gráficas dinámicas para detección de fallos en maquinaria de clasificación automática de correo postal.</p>
+                <p><strong>Tecnologías implementadas:</strong></p>
+                <ul>
+                    <li><strong>Frontend:</strong> Angular 17, TypeScript, Bootstrap, WebSockets (STOMP)</li>
+                    <li><strong>Backend:</strong> Spring Boot 3.2.4, Java 17, JDBC Template</li>
+                    <li><strong>Base de datos:</strong> MS Access con conector JDBC UcanAccess</li>
+                    <li><strong>Características destacadas:</strong>
+                        <ul>
+                            <li>Dashboard interactivo con gráficas dinámicas (ngx-charts)</li>
+                            <li>Sistema de monitorización en tiempo real mediante WebSockets</li>
+                            <li>Interface remota portátil para control de maquinaria</li>
+                            <li>Chat integrado para comunicación técnica</li>
+                            <li>Consultas SQL parametrizadas y filtrado avanzado</li>
+                        </ul>
+                    </li>
+                </ul>
+                <p><strong>Repositorios GitHub:</strong></p>
+                <ul>
+                    <li>Frontend: github.com/ZonaLimite/FrontEndTOP</li>
+                    <li>Backend: github.com/ZonaLimite/BackendTOP</li>
+                    <li>Engine: github.com/ZonaLimite/Engine</li>
+                </ul>
+            </div>
+
+            <div class="project-card">
+                <h3>Herramientas de Diagnóstico y Monitorización Industrial</h3>
+                <div class="project-meta">
+                    <span class="project-badge">Desarrollo Propio</span>
+                    <span class="project-badge">Producción</span>
+                </div>
+                <p><strong>Descripción:</strong> Suite de herramientas desarrolladas para optimización del mantenimiento y resolución de averías en instalaciones de Correos.</p>
+                <p><strong>Componentes principales:</strong></p>
+                <ul>
+                    <li>Herramientas de monitorización y diagnóstico para mantenimiento experto</li>
+                    <li>Aplicativos intranet para documentación y acceso a estadísticas de producción</li>
+                    <li>Cuadros de mando con informes estadísticos personalizados</li>
+                    <li>Herramientas de construcción de mapas de clasificación</li>
+                    <li>Sistemas de recopilación automática de datos de producción</li>
+                </ul>
+                <p><strong>Impacto:</strong> Reducción significativa del tiempo de detección y resolución de averías, mejora en la disponibilidad de la maquinaria.</p>
+            </div>
+
+            <div class="project-card">
+                <h3>Portal Corporativo Intranet - Correos</h3>
+                <div class="project-meta">
+                    <span class="project-badge">Abantia</span>
+                    <span class="project-badge">2004</span>
+                </div>
+                <p><strong>Descripción:</strong> Portal corporativo a nivel de intranet con arquitectura MVC de tres capas.</p>
+                <p><strong>Stack tecnológico:</strong></p>
+                <ul>
+                    <li>Capa de presentación: HTML, JavaScript, CSS, JSP</li>
+                    <li>Lógica de negocio: Java</li>
+                    <li>Persistencia: SQL Server con procedimientos almacenados</li>
+                    <li>Infraestructura: Apache + JRUN (contenedor servlets)</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Formación -->
+        <section id="formacion" class="section">
+            <h2 class="section-title">Formación Académica</h2>
+            <div class="education-grid">
+                <div class="education-card">
+                    <div class="education-icon">🎓</div>
+                    <div>
+                        <h3>Curso de Especialización en Inteligencia Artificial y Big Data (IABD)</h3>
+                        <div class="institution">CIERD-CIDEAD - Grado Superior</div>
+                        <div class="year">📚 En curso - Inicio: Noviembre 2024</div>
+                    </div>
+                </div>
+
+                <div class="education-card">
+                    <div class="education-icon">🎓</div>
+                    <div>
+                        <h3>Técnico Superior en Desarrollo de Aplicaciones Multiplataforma (DAM)</h3>
+                        <div class="institution">CIDEAD - Centro Integrado de Enseñanzas a Distancia</div>
+                        <div class="year">✅ Finalizado: Junio 2024 | Calificación: 7.46</div>
+                        <p style="margin-top: 0.5rem; color: var(--text-light);">Especialización en desarrollo Java, Spring, Angular, bases de datos, desarrollo móvil y arquitecturas empresariales.</p>
+                    </div>
+                </div>
+
+                <div class="education-card">
+                    <div class="education-icon">🎓</div>
+                    <div>
+                        <h3>Técnico Superior en Administración de Sistemas Informáticos en Red (ASIR)</h3>
+                        <div class="institution">IES CIFP Ignacio Ellacuría - EducaMadrid</div>
+                        <div class="year">✅ Finalizado: Julio 2022 | Calificación: 9.07</div>
+                        <p style="margin-top: 0.5rem; color: var(--text-light);">Administración de sistemas Linux/Windows, redes, seguridad, bases de datos y virtualización.</p>
+                    </div>
+                </div>
+
+                <div class="education-card">
+                    <div class="education-icon">📜</div>
+                    <div>
+                        <h3>Máster en Automatización Industrial</h3>
+                        <div class="institution">InterGrupo</div>
+                        <div class="year">✅ Marzo 2008 - Diciembre 2008</div>
+                    </div>
+                </div>
+
+                <div class="education-card">
+                    <div class="education-icon">📜</div>
+                    <div>
+                        <h3>Máster en Programación Internet-Intranet JAVA</h3>
+                        <div class="institution">INFO-92</div>
+                        <div class="year">✅ Septiembre 2000 - Mayo 2001</div>
+                    </div>
+                </div>
+
+                <div class="education-card">
+                    <div class="education-icon">📜</div>
+                    <div>
+                        <h3>Bachillerato</h3>
+                        <div class="institution">Instituto Bachillerato Simancas</div>
+                        <div class="year">✅ 1987 - 1990</div>
+                    </div>
+                </div>
+
+                <div class="education-card">
+                    <div class="education-icon">📜</div>
+                    <div>
+                        <h3>FP Grado Medio - Electricidad y Electrónica</h3>
+                        <div class="institution">Escuela de Transmisiones de Cuatro Vientos (Ejército del Aire)</div>
+                        <div class="year">✅ 1980 - 1982</div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 style="margin-top: 3rem; margin-bottom: 1.5rem; color: var(--primary); font-size: 1.5rem;">Certificaciones Complementarias</h3>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>📊 Data Warehouse & Business Intelligence</h3>
+                    <p style="margin-top: 0.5rem; font-size: 0.9rem; color: var(--text-light);">Centro Cultural y Deportivo Tajamar - 40 horas (2021)</p>
+                    <p style="margin-top: 0.5rem; font-size: 0.85rem;">Conceptos de Data Mart/Warehouse, OLAP, ETL, minería de datos, Discoverer.</p>
+                </div>
+
+                <div class="skill-category">
+                    <h3>☁️ Cloud Computing (Azure, Linux)</h3>
+                    <p style="margin-top: 0.5rem; font-size: 0.9rem; color: var(--text-light);">Centro Cultural y Deportivo Tajamar - 30 horas (2021)</p>
+                    <p style="margin-top: 0.5rem; font-size: 0.85rem;">Virtualización, Azure, servicios cloud, bases de datos en cloud.</p>
+                </div>
+
+                <div class="skill-category">
+                    <h3>📈 Big Data</h3>
+                    <p style="margin-top: 0.5rem; font-size: 0.9rem; color: var(--text-light);">Centro Cultural y Deportivo Tajamar - 40 horas (2021)</p>
+                    <p style="margin-top: 0.5rem; font-size: 0.85rem;">Fundamentos de Big Data, analítica avanzada, procesamiento de grandes volúmenes de datos.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section id="contacto" class="cta-section">
+            <h2>¿Buscas un desarrollador versátil y comprometido?</h2>
+            <p>Estoy abierto a nuevas oportunidades que me permitan aplicar mi experiencia única en desarrollo de software, automatización y sistemas.</p>
+            <div class="cta-buttons">
+                <a href="mailto:javier.boga@yahoo.es" class="btn btn-primary">📧 Contactar por Email</a>
+                <a href="tel:+34640609402" class="btn btn-secondary">📱 Llamar Ahora</a>
+                <a href="https://www.linkedin.com/in/fco-javier-boga-rioja-technician/" target="_blank" class="btn btn-secondary">💼 LinkedIn</a>
+                <a href="http://bogaservic.es:8080/wildfly/web/Index.html" target="_blank" class="btn btn-secondary">🌐 Portfolio Online</a>
+            </div>
+        </section>
+
+        <!-- Información Adicional -->
+        <section class="section">
+            <h2 class="section-title">Información Complementaria</h2>
+            <div class="about-grid">
+                <div class="about-card">
+                    <h3>🚗 Movilidad</h3>
+                    <p><strong>Permisos de conducir:</strong> B, B+E, C1, C1+E, C, C+E, D1, D1+E, D, D+E</p>
+                    <p><strong>Vehículo propio:</strong> Sí</p>
+                    <p><strong>Disponibilidad para viajar:</strong> Según condiciones</p>
+                    <p><strong>Cambio de residencia:</strong> Según condiciones</p>
+                </div>
+
+                <div class="about-card">
+                    <h3>💼 Situación Laboral</h3>
+                    <p><strong>Estado:</strong> Empleado (abierto a ofertas interesantes)</p>
+                    <p><strong>Expectativas salariales:</strong> 38.000€ - 42.000€ bruto/año</p>
+                    <p><strong>Tipo de contrato preferido:</strong> Indefinido</p>
+                    <p><strong>Jornada:</strong> Indiferente</p>
+                </div>
+
+                <div class="about-card">
+                    <h3>🌍 Idiomas</h3>
+                    <p><strong>Español:</strong> Nativo</p>
+                    <p><strong>Inglés:</strong> Intermedio</p>
+                    <p style="margin-top: 0.5rem; font-size: 0.9rem; color: var(--text-light);">Nivel de conversación coloquial y nivel alto de lectura de inglés técnico</p>
+                </div>
+
+                <div class="about-card">
+                    <h3>🎯 Objetivos Profesionales</h3>
+                    <p>Desarrollar mi carrera en el ámbito del desarrollo de software, automatización, I+D y puesta a punto de instalaciones. Busco proyectos desafiantes que combinen mi experiencia técnica con las nuevas tecnologías.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Motivación para el cambio -->
+        <section class="section">
+            <h2 class="section-title">¿Por qué consideraría un cambio?</h2>
+            <div class="project-card">
+                <h3>Mi Propuesta de Valor</h3>
+                <p>Después de más de 20 años compaginando automatización industrial con desarrollo de software, mi objetivo es consolidar mi carrera profesional enfocándome completamente en el desarrollo de aplicaciones.</p>
+                <p style="margin-top: 1rem;"><strong>Lo que me motiva:</strong></p>
+                <ul style="margin-top: 0.5rem;">
+                    <li><strong>Transición definitiva al desarrollo:</strong> Pasar de un rol híbrido mantenimiento/desarrollo a un puesto 100% desarrollo de software</li>
+                    <li><strong>Conciliación vida familiar:</strong> Busco un entorno que valore el equilibrio trabajo-vida personal</li>
+                    <li><strong>Crecimiento profesional:</strong> Proyectos desafiantes con tecnologías modernas (microservicios, cloud, IA/ML)</li>
+                    <li><strong>Aprendizaje continuo:</strong> Equipos donde pueda seguir creciendo y aportando mi experiencia única</li>
+                    <li><strong>Impacto real:</strong> Contribuir a proyectos que marquen la diferencia</li>
+                </ul>
+                <p style="margin-top: 1rem;"><strong>Mi ventaja competitiva:</strong></p>
+                <p>Mi background en automatización industrial me proporciona una comprensión profunda de sistemas complejos, troubleshooting avanzado y la capacidad de ver el "big picture" que pocos desarrolladores poseen. Esta experiencia es especialmente valiosa en proyectos IoT, Industry 4.0, sistemas críticos y arquitecturas empresariales complejas.</p>
+            </div>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2026 Francisco Javier Boga Rioja. Todos los derechos reservados.</p>
+        <p style="margin-top: 0.5rem; opacity: 0.8;">Desarrollador Full Stack Java | Especialista en Automatización Industrial</p>
+        <p style="margin-top: 1rem; font-size: 0.9rem;">
+            📧 javier.boga@yahoo.es | 📱 640 609 402 | 📍 Madrid, España
+        </p>
+    </footer>
+
+    <script>
+        // Smooth scroll para navegación
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Animación de entrada para las secciones
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(20px)';
+            section.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
