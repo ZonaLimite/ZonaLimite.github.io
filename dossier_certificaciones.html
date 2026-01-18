@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dossier de Certificaciones - Francisco Javier Boga Rioja</title>
+    <style>
+        @media print {
+            .no-print { display: none; }
+            body { background: white; }
+            .certificate-card { page-break-inside: avoid; }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2563eb;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --secondary: #0f172a;
+            --text: #334155;
+            --text-light: #64748b;
+            --bg: #f8fafc;
+            --border: #e2e8f0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--bg);
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 3rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            border-radius: 10px;
+        }
+
+        .header {
+            text-align: center;
+            padding-bottom: 2rem;
+            border-bottom: 3px solid var(--primary);
+            margin-bottom: 3rem;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .header h2 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: normal;
+            margin-bottom: 1rem;
+        }
+
+        .header-info {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+            color: var(--text-light);
+        }
+
+        .header-info span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .summary-section {
+            background: linear-gradient(135deg, var(--primary), #1e40af);
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .summary-section h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .summary-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .stat-box {
+            background: rgba(255,255,255,0.2);
+            padding: 1.5rem;
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.95rem;
+            opacity: 0.95;
+        }
+
+        .section {
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: var(--secondary);
+            margin-bottom: 2rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .section-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: white;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .certificates-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .certificate-card {
+            background: white;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            padding: 2rem;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .certificate-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: var(--primary);
+        }
+
+        .certificate-card.oficial::before {
+            background: var(--success);
+        }
+
+        .certificate-card.complementaria::before {
+            background: var(--warning);
+        }
+
+        .certificate-card:hover {
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+            transform: translateY(-3px);
+        }
+
+        .certificate-header {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 1.5rem;
+            align-items: start;
+            margin-bottom: 1.5rem;
+        }
+
+        .cert-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary), #1e40af);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            flex-shrink: 0;
+        }
+
+        .cert-icon.oficial {
+            background: linear-gradient(135deg, var(--success), #059669);
+        }
+
+        .cert-icon.complementaria {
+            background: linear-gradient(135deg, var(--warning), #d97706);
+        }
+
+        .cert-main {
+            flex: 1;
+        }
+
+        .cert-title {
+            font-size: 1.4rem;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .cert-institution {
+            color: var(--text-light);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .cert-details {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 0.5rem;
+        }
+
+        .cert-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            padding: 0.4rem 0.8rem;
+            border-radius: 5px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .cert-badge.date {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .cert-badge.duration {
+            background: #f3e8ff;
+            color: #6b21a8;
+        }
+
+        .cert-badge.grade {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .cert-badge.status {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .cert-status {
+            text-align: right;
+        }
+
+        .status-indicator {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .status-completed {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .status-in-progress {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .cert-description {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+            color: var(--text);
+        }
+
+        .cert-description ul {
+            margin-left: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .cert-description li {
+            margin-bottom: 0.3rem;
+        }
+
+        .verification-info {
+            background: #f1f5f9;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        .verification-code {
+            font-family: 'Courier New', monospace;
+            background: white;
+            padding: 0.3rem 0.6rem;
+            border-radius: 3px;
+            display: inline-block;
+            margin-top: 0.3rem;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .competencias-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        .competencias-table th,
+        .competencias-table td {
+            padding: 0.8rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .competencias-table th {
+            background: var(--bg);
+            font-weight: 600;
+            color: var(--secondary);
+        }
+
+        .competencias-table tr:hover {
+            background: #f8fafc;
+        }
+
+        .footer {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 2px solid var(--border);
+            text-align: center;
+            color: var(--text-light);
+        }
+
+        .print-button {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+
+        .print-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.5);
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+            .container {
+                padding: 1.5rem;
+            }
+            .certificate-header {
+                grid-template-columns: 1fr;
+            }
+            .cert-status {
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Francisco Javier Boga Rioja</h1>
+            <h2>Dossier de Certificaciones y Titulaciones</h2>
+            <div class="header-info">
+                <span>📧 javier.boga@yahoo.es</span>
+                <span>📱 640 609 402</span>
+                <span>📍 Madrid, España</span>
+                <span>📅 Actualizado: Enero 2026</span>
+            </div>
+        </header>
+
+        <div class="summary-section">
+            <h3>Resumen Ejecutivo de Formación</h3>
+            <p style="opacity: 0.95; margin-bottom: 1rem;">Perfil multidisciplinar con formación continua en desarrollo de software, sistemas informáticos y automatización industrial</p>
+            <div class="summary-stats">
+                <div class="stat-box">
+                    <span class="stat-number">3</span>
+                    <span class="stat-label">Ciclos Formativos de Grado Superior</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number">2</span>
+                    <span class="stat-label">Másteres Especializados</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number">3</span>
+                    <span class="stat-label">Certificaciones Profesionales</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number">25+</span>
+                    <span class="stat-label">Años de Formación Continua</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- TITULACIONES OFICIALES EN CURSO -->
+        <section class="section">
+            <h2 class="section-title">
+                <div class="section-icon">📚</div>
+                Formación en Curso
+            </h2>
+            
+            <div class="certificates-grid">
+                <div class="certificate-card oficial">
+                    <div class="certificate-header">
+                        <div class="cert-icon oficial">🎓</div>
+                        <div class="cert-main">
+                            <h3 class="cert-title">Curso de Especialización en Inteligencia Artificial y Big Data (IABD)</h3>
+                            <p class="cert-institution">CIERD-CIDEAD - Centro Integrado de Enseñanzas Regladas a Distancia</p>
+                            <div class="cert-details">
+                                <span class="cert-badge date">📅 Inicio: Noviembre 2024</span>
+                                <span class="cert-badge status">⏳ En curso</span>
+                                <span class="cert-badge duration">⏱️ Curso de Especialización</span>
+                            </div>
+                        </div>
+                        <div class="cert-status">
+                            <span class="status-indicator status-in-progress">En Progreso</span>
+                        </div>
+                    </div>
+                    <div class="cert-description">
+                        <p><strong>Especialización oficial de Grado Superior</strong> enfocada en tecnologías emergentes de IA y análisis de grandes volúmenes de datos.</p>
+                        <p style="margin-top: 0.8rem;"><strong>Áreas de estudio:</strong></p>
+                        <ul>
+                            <li>Machine Learning y Deep Learning</li>
+                            <li>Procesamiento de Big Data (Hadoop, Spark)</li>
+                            <li>Modelos de IA y sistemas inteligentes</li>
+                            <li>Análisis predictivo y minería de datos</li>
+                            <li>Python para Data Science</li>
+                            <li>Visualización de datos avanzada</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TITULACIONES OFICIALES COMPLETADAS -->
+        <section class="section">
+            <h2 class="section-title">
+                <div class="section-icon">🎓</div>
+                Titulaciones Oficiales de Grado Superior
+            </h2>
+            
+            <div class="certificates-grid">
+                <!-- DAM -->
+                <div class="certificate-card oficial">
+                    <div class="certificate-header">
+                        <div class="cert-icon oficial">🏆</div>
+                        <div class="cert-main">
+                            <h3 class="cert-title">Técnico Superior en Desarrollo de Aplicaciones Multiplataforma (DAM)</h3>
+                            <p class="cert-institution">CIDEAD - Centro Integrado de Enseñanzas a Distancia</p>
+                            <div class="cert-details">
+                                <span class="cert-badge date">📅 Oct 2022 - Jun 2024</span>
+                                <span class="cert-badge duration">⏱️ 2000 horas</span>
+                                <span class="cert-badge grade">⭐ Calificación: 7.46</span>
+                            </div>
+                        </div>
+                        <div class="cert-status">
+                            <span class="status-indicator status-completed">✓ Completado</span>
+                        </div>
+                    </div>
+                    <div class="cert-description">
+                        <p><strong>Titulación oficial LOE</strong> de la familia profesional de Informática y Comunicaciones.</p>
+                        <p style="margin-top: 0.8rem;"><strong>Módulos profesionales cursados:</strong></p>
+                        <ul>
+                            <li>Lenguajes de marcas y sistemas de gestión de información (9/10)</li>
+                            <li>Sistemas informáticos (8/10)</li>
+                            <li>Programación (5/10)</li>
+                            <li>Bases de datos (5/10)</li>
+                            <li>Entornos de desarrollo (8/10)</li>
+                            <li>Acceso a datos (8/10)</li>
+                            <li>Desarrollo de interfaces (6/10)</li>
+                            <li>Programación multimedia y dispositivos móviles (9/10)</li>
+                            <li>Programación de servicios y procesos (9/10)</li>
+                            <li>Sistemas de gestión empresarial (9/10)</li>
+                            <li>Proyecto de desarrollo de aplicaciones multiplataforma (8/10)</li>
+                        </ul>
+                        
+                        <div style="margin-top: 1rem;">
+                            <strong>Competencias profesionales acreditadas (Catálogo Nacional):</strong>
+                        </div>
+                        <table class="competencias-table">
+                            <thead>
+                                <tr>
+                                    <th>Código</th>
+                                    <th>Unidad de Competencia</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>UC0223_3</td>
+                                    <td>Configurar y explotar sistemas informáticos</td>
+                                </tr>
+                                <tr>
+                                    <td>UC0964_3</td>
+                                    <td>Crear elementos software para la gestión del sistema y sus recursos</td>
+                                </tr>
+                                <tr>
+                                    <td>UC0494_3</td>
+                                    <td>Desarrollar componentes software en lenguajes de programación estructurada</td>
+                                </tr>
+                                <tr>
+                                    <td>UC0227_3</td>
+                                    <td>Desarrollar componentes software en lenguajes de programación orientados a objetos</td>
+                                </tr>
+                                <tr>
+                                    <td>UC1213_3</td>
+                                    <td>Instalar y configurar sistemas de planificación de recursos empresariales y CRM</td>
+                                </tr>
+                                <tr>
+                                    <td>UC0226_3</td>
+                                    <td>Programar bases de datos relacionales</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="verification-info">
+                        <strong>📄 Verificación oficial:</strong> Código seguro de verificación
+                        <div class="verification-code">GEN-f2cb-89cc-2376-5009-190c-99cf-7b07-6623</div>
+                        <div style="margin-top: 0.5rem;">Verificable en: <a href="https://sede.administracion.gob.es/pagSedeFront/servicios/consultaCSV.htm" target="_blank">sede.administracion.gob.es</a></div>
+                    </div>
+                </div>
+
+                <!-- ASIR -->
+                <div class="certificate-card oficial">
+                    <div class="certificate-header">
+                        <div class="cert-icon oficial">🏆</div>
+                        <div class="cert-main">
+                            <h3 class="cert-title">Técnico Superior en Administración de Sistemas Informáticos en Red (ASIR)</h3>
+                            <p class="cert-institution">IES CIFP Ignacio Ellacuría - EducaMadrid</p>
+                            <div class="cert-details">
+                                <span class="cert-badge date">📅 Sep 2020 - Jul 2022</span>
+                                <span class="cert-badge duration">⏱️ 2000 horas</span>
+                                <span class="cert-badge grade">⭐ Calificación: 9.07</span>
+                            </div>
+                        </div>
+                        <div class="cert-status">
+                            <span class="status-indicator status-completed">✓ Completado</span>
+                        </div>
+                    </div>
+                    <div class="cert-description">
+                        <p><strong>Titulación oficial LOE</strong> especializada en administración de infraestructuras TI.</p>
+                        <p style="margin-top: 0.8rem;"><strong>Módulos profesionales cursados (con honores):</strong></p>
+                        <ul>
+                            <li>Implantación de sistemas operativos (10 - Matrícula de Honor)</li>
+                            <li>Planificación y administración de redes (10/10)</li>
+                            <li>Administración de sistemas operativos (10/10)</li>
+                            <li>Seguridad y alta disponibilidad (10/10)</li>
+                            <li>Lenguajes de marcas y sistemas de gestión de información (10/10)</li>
+                            <li>Gestión de bases de datos (9/10)</li>
+                            <li>Administración de sistemas gestores de bases de datos (9/10)</li>
+                            <li>Implantación de aplicaciones web (9/10)</li>
+                            <li>Servicios de red e Internet (9/10)</li>
+                            <li>Fundamentos de hardware (9/10)</li>
+                        </ul>
+                        
+                        <div style="margin-top: 1rem;">
+                            <strong>Competencias profesionales acreditadas:</strong>
+                        </div>
+                        <table class="competencias-table">
+                            <thead>
+                                <tr>
+                                    <th>Código</th>
+                                    <th>Unidad de Competencia</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>UC0485_3</td>
+                                    <td>Instalar, configurar y administrar el software de base y de aplicación del sistema</td>
+                                </tr>
+                                <tr>
+                                    <td>UC0490_3</td>
+                                    <td>Gestionar servicios en el sistema informático</td>
+                                </tr>
+                                <tr>
+                                    <td>UC0224_3</td>
+                                    <td>Configurar y gestionar un sistema gestor de bases de datos</td>
+                                </tr>
+                                <tr>
+                                    <td>UC0223_3</td>
+                                    <td>Configurar y explotar sistemas informáticos</td>
+                                </tr>
+                                <tr>
+                                    <td>UC0484_3</td>
+                                    <td>Administrar los dispositivos hardware del sistema</td>
+                                </tr>
+                                <tr>
+                                    <td>UC0225_3</td>
+                                    <td>Configurar y gestionar la base de datos</td>
+                                </tr>
+                                <tr>
+                                    <td>UC0493_3</td>
+                                    <td>Implementar, verificar y documentar aplicaciones web en entornos internet, intranet y extranet</td>
+                                </tr>
+                                <tr>
+                                    <td>UC0486_3</td>
+                                    <td>Asegurar equipos informáticos</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="verification-info">
+                        <strong>📄 Certificación académica oficial</strong> expedida el 13 de julio de 2022
+                        <div style="margin-top: 0.5rem;">IES CIFP Ignacio Ellacuría - Código de centro: 28080141</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MÁSTERES -->
+        <section class="section">
+            <h2 class="section-title">
+                <div class="section-icon">📖</div>
+                Másteres y Especializaciones
+            </h2>
+            
+            <div class="certificates-grid">
+                <div class="certificate-card">
+                    <div class="certificate-header">
+                        <div class="cert-icon">🎯</div>
+                        <div class="cert-main">
+                            <h3 class="cert-title">Máster en Automatización Industrial</h3>
+                            <p class="cert-institution">InterGrupo</p>
+                            <div class="cert-details">
+                                <span class="cert-badge date">📅 Mar 2008 - Dic 2008</span>
+                                <span class="cert-badge duration">⏱️ 9 meses</span>
+                            </div>
+                        </div>
+                        <div class="cert-status">
+                            <span class="status-indicator status-completed">✓ Completado</span>
+                        </div>
+                    </div>
+                    <div class="cert-description">
+                        <p>Formación especializada en sistemas de automatización industrial, control de procesos y supervisión de instalaciones automatizadas.</p>
+                    </div>
+                </div>
+
+                <div class="certificate-card">
+                    <div class="certificate-header">
+                        <div class="cert-icon">💻</div>
+                        <div class="cert-main">
+                            <h3 class="cert-title">Máster en Programación Internet-Intranet JAVA</h3>
+                            <p class="cert-institution">INFO-92</p>
+                            <div class="cert-details">
+                                <span class="cert-badge date">📅 Sep 2000 - May 2001</span>
+                                <span class="cert-badge duration">⏱️ 8 meses</span>
+                            </div>
+                        </div>
+                        <div class="cert-status">
+                            <span class="status-indicator status-completed">✓ Completado</span>
+                        </div>
+                    </div>
+                    <div class="cert-description">
+                        <p>Especialización en desarrollo de aplicaciones Java para entornos web, arquitecturas cliente-servidor y desarrollo de aplicaciones empresariales.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CERTIFICACIONES PROFESIONALES -->
+        <section class="section">
+            <h2 class="section-title">
+                <div class="section-icon">🏅</div>
+                Certificaciones Profesionales
+            </h2>
+            
+            <div class="certificates-grid">
+                <div class="certificate-card complementaria">
+                    <div class="certificate-header">
+                        <div class="cert-icon complementaria">📊</div>
+                        <div class="cert-main">
+                            <h3 class="cert-title">Data Warehouse & Business Intelligence</h3>
+                            <p class="cert-institution">Centro Cultural y Deportivo Tajamar SA</p>
+                            <div class="cert-details">
+                                <span class="cert-badge date">📅 02/09/2021 - 29/09/2021</span>
+                                <span class="cert-badge duration">⏱️ 40 horas</span>
+                            </div>
+                        </div>
+                        <div class="cert-status">
+                            <span class="status-indicator status-completed">✓ Certificado</span>
+                        </div>
+                    </div>
+                    <div class="cert-description">
+                        <p><strong>Código acción formativa:</strong> IFCD013PO</p>
+                        <p style="margin-top: 0.5rem;"><strong>Contenidos:</strong></p>
+                        <ul>
+                            <li>Concepto de Data Mart y Data Warehouse</li>
+                            <li>Diseño lógico y físico de bases de datos centrales</li>
+                            <li>Diseño e implementación física de cubos</li>
+                            <li>ETL: Extracción, Transformación y Carga</li>
+                            <li>OLAP y herramientas Discoverer (Administrador y Desktop)</li>
+                            <li>Técnicas de minería de datos y Data Mining</li>
+                        </ul>
+                    </div>
+                    <div class="verification-info">
+                        <strong>📄 Expediente:</strong> F182043AA | <strong>Código de grupo:</strong> 007
+                    </div>
+                </div>
+
+                <div class="certificate-card complementaria">
+                    <div class="certificate-header">
+                        <div class="cert-icon complementaria">☁️</div>
+                        <div class="cert-main">
+                            <h3 class="cert-title">Cloud Computing (Azure, Linux)</h3>
+                            <p class="cert-institution">Centro Cultural y Deportivo Tajamar SA</p>
+                            <div class="cert-details">
+                                <span class="cert-badge date">📅 10/06/2021 - 07/07/2021</span>
+                                <span class="cert-badge duration">⏱️ 30 horas</span>
+                            </div>
+                        </div>
+                        <div class="cert-status">
+                            <span class="status-indicator status-completed">✓ Certificado</span>
+                        </div>
+                    </div>
+                    <div class="cert-description">
+                        <p><strong>Código acción formativa:</strong> IFCT026PO</p>
+                        <p style="margin-top: 0.5rem;"><strong>Contenidos:</strong></p>
+                        <ul>
+                            <li>Fundamentos de Cloud Computing y virtualización</li>
+                            <li>Plataforma Windows Azure: administración y virtualización</li>
+                            <li>Servicios de Azure y bases de datos en la nube</li>
+                            <li>Programación en Azure (análisis, diseño, codificación, depuración)</li>
+                            <li>Distribuciones Linux en la nube</li>
+                            <li>Servicios cloud en Linux y programación</li>
+                            <li>Interoperabilidad entre plataformas cloud</li>
+                        </ul>
+                    </div>
+                    <div class="verification-info">
+                        <strong>📄 Expediente:</strong> F182043AA | <strong>Código de grupo:</strong> 003
+                    </div>
+                </div>
+
+                <div class="certificate-card complementaria">
+                    <div class="certificate-header">
+                        <div class="cert-icon complementaria">📈</div>
+                        <div class="cert-main">
+                            <h3 class="cert-title">Big Data</h3>
+                            <p class="cert-institution">Centro Cultural y Deportivo Tajamar SA</p>
+                            <div class="cert-details">
+                                <span class="cert-badge date">📅 15/07/2021 - 11/08/2021</span>
+                                <span class="cert-badge duration">⏱️ 40 horas</span>
+                            </div>
+                        </div>
+                        <div class="cert-status">
+                            <span class="status-indicator status-completed">✓ Certificado</span>
+                        </div>
+                    </div>
+                    <div class="cert-description">
+                        <p><strong>Código acción formativa:</strong> IFCT128PO</p>
+                        <p style="margin-top: 0.5rem;"><strong>Contenidos:</strong></p>
+                        <ul>
+                            <li>Antecedentes y definiciones de Big Data</li>
+                            <li>La importancia del dato en la era digital</li>
+                            <li>Conceptos técnicos de analítica tradicional</li>
+                            <li>Representación de datos masivos</li>
+                            <li>Introducción al Big Data y sus aplicaciones</li>
+                            <li>Introducción a la analítica avanzada</li>
+                        </ul>
+                    </div>
+                    <div class="verification-info">
+                        <strong>📄 Expediente:</strong> F182043AA | <strong>Código de grupo:</strong> 007
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FORMACIÓN DE BASE -->
+        <section class="section">
+            <h2 class="section-title">
+                <div class="section-icon">📚</div>
+                Formación de Base
+            </h2>
+            
+            <div class="certificates-grid">
+                <div class="certificate-card">
+                    <div class="certificate-header">
+                        <div class="cert-icon">🎓</div>
+                        <div class="cert-main">
+                            <h3 class="cert-title">Bachillerato</h3>
+                            <p class="cert-institution">Instituto Bachillerato Simancas</p>
+                            <div class="cert-details">
+                                <span class="cert-badge date">📅 Ene 1987 - Ene 1990</span>
+                                <span class="cert-badge duration">⏱️ 3 años</span>
+                            </div>
+                        </div>
+                        <div class="cert-status">
+                            <span class="status-indicator status-completed">✓ Completado</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="certificate-card">
+                    <div class="certificate-header">
+                        <div class="cert-icon">⚡</div>
+                        <div class="cert-main">
+                            <h3 class="cert-title">Formación Profesional Grado Medio - Electricidad y Electrónica</h3>
+                            <p class="cert-institution">Escuela de Transmisiones de Cuatro Vientos (Ejército del Aire)</p>
+                            <div class="cert-details">
+                                <span class="cert-badge date">📅 Sep 1980 - Jun 1982</span>
+                                <span class="cert-badge duration">⏱️ 1 año y 9 meses</span>
+                            </div>
+                        </div>
+                        <div class="cert-status">
+                            <span class="status-indicator status-completed">✓ Completado</span>
+                        </div>
+                    </div>
+                    <div class="cert-description">
+                        <p>Formación técnica en electricidad, electrónica y sistemas de transmisiones. Base fundamental para mi posterior desarrollo en automatización industrial.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TRAYECTORIA FORMATIVA -->
+        <section class="section">
+            <h2 class="section-title">
+                <div class="section-icon">📊</div>
+                Evolución de la Trayectoria Formativa
+            </h2>
+            
+            <div style="background: var(--bg); padding: 2rem; border-radius: 10px; border-left: 4px solid var(--primary);">
+                <h3 style="color: var(--primary); margin-bottom: 1rem;">Cronología de Formación</h3>
+                
+                <div style="display: grid; gap: 1rem;">
+                    <div style="display: flex; align-items: center; gap: 1rem; padding: 1rem; background: white; border-radius: 5px;">
+                        <div style="font-weight: bold; color: var(--primary); min-width: 100px;">1980-1982</div>
+                        <div style="flex: 1;">FP Grado Medio - Electricidad y Electrónica</div>
+                        <div style="color: var(--text-light); font-size: 0.85rem;">⚡ Base técnica</div>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; gap: 1rem; padding: 1rem; background: white; border-radius: 5px;">
+                        <div style="font-weight: bold; color: var(--primary); min-width: 100px;">1987-1990</div>
+                        <div style="flex: 1;">Bachillerato</div>
+                        <div style="color: var(--text-light); font-size: 0.85rem;">📚 Formación general</div>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; gap: 1rem; padding: 1rem; background: white; border-radius: 5px;">
+                        <div style="font-weight: bold; color: var(--primary); min-width: 100px;">2000-2001</div>
+                        <div style="flex: 1;">Máster Programación Internet-Intranet JAVA</div>
+                        <div style="color: var(--text-light); font-size: 0.85rem;">💻 Inicio desarrollo</div>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; gap: 1rem; padding: 1rem; background: white; border-radius: 5px;">
+                        <div style="font-weight: bold; color: var(--primary); min-width: 100px;">2008</div>
+                        <div style="flex: 1;">Máster Automatización Industrial</div>
+                        <div style="color: var(--text-light); font-size: 0.85rem;">🤖 Especialización industrial</div>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; gap: 1rem; padding: 1rem; background: white; border-radius: 5px;">
+                        <div style="font-weight: bold; color: var(--primary); min-width: 100px;">2020-2022</div>
+                        <div style="flex: 1;">Técnico Superior ASIR (Calificación: 9.07)</div>
+                        <div style="color: var(--text-light); font-size: 0.85rem;">🏆 Excelencia académica</div>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; gap: 1rem; padding: 1rem; background: white; border-radius: 5px;">
+                        <div style="font-weight: bold; color: var(--warning); min-width: 100px;">2021</div>
+                        <div style="flex: 1;">Certificaciones: Data Warehouse, Cloud Computing, Big Data</div>
+                        <div style="color: var(--text-light); font-size: 0.85rem;">📈 Actualización continua</div>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; gap: 1rem; padding: 1rem; background: white; border-radius: 5px;">
+                        <div style="font-weight: bold; color: var(--success); min-width: 100px;">2022-2024</div>
+                        <div style="flex: 1;">Técnico Superior DAM (Calificación: 7.46)</div>
+                        <div style="color: var(--text-light); font-size: 0.85rem;">🎯 Desarrollo Full Stack</div>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; gap: 1rem; padding: 1rem; background: linear-gradient(135deg, #fef3c7, #fde68a); border-radius: 5px; border: 2px solid var(--warning);">
+                        <div style="font-weight: bold; color: var(--warning); min-width: 100px;">2024-Actual</div>
+                        <div style="flex: 1; font-weight: 600;">Especialización IA y Big Data (En curso)</div>
+                        <div style="color: var(--warning); font-size: 0.85rem; font-weight: 600;">🚀 Futuro</div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 2rem; padding: 1.5rem; background: white; border-radius: 5px;">
+                    <h4 style="color: var(--secondary); margin-bottom: 1rem;">📌 Puntos Clave de mi Trayectoria Formativa</h4>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border);">
+                            ✅ <strong>25+ años de formación continua</strong> demostrando compromiso constante con el aprendizaje
+                        </li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border);">
+                            ✅ <strong>Formación multidisciplinar</strong> que combina electrónica, sistemas, desarrollo y análisis de datos
+                        </li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border);">
+                            ✅ <strong>Titulaciones oficiales recientes</strong> (2022-2024) que certifican conocimientos actualizados
+                        </li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border);">
+                            ✅ <strong>Excelencia académica</strong> con calificaciones superiores a 7/10 en todos los ciclos
+                        </li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border);">
+                            ✅ <strong>Especialización en tecnologías emergentes</strong> (IA, Big Data, Cloud)
+                        </li>
+                        <li style="padding: 0.5rem 0;">
+                            ✅ <strong>Competencias profesionales oficialmente acreditadas</strong> por el Catálogo Nacional de Cualificaciones
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- COMPETENCIAS TRANSVERSALES -->
+        <section class="section">
+            <h2 class="section-title">
+                <div class="section-icon">💡</div>
+                Competencias Transversales Desarrolladas
+            </h2>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+                <div style="background: white; border: 2px solid var(--border); border-radius: 10px; padding: 1.5rem;">
+                    <h4 style="color: var(--primary); margin-bottom: 1rem;">🎯 Aprendizaje Continuo</h4>
+                    <p style="color: var(--text-light);">Capacidad demostrada de adquirir nuevos conocimientos de forma autónoma y aplicarlos efectivamente en entornos profesionales.</p>
+                </div>
+                
+                <div style="background: white; border: 2px solid var(--border); border-radius: 10px; padding: 1.5rem;">
+                    <h4 style="color: var(--primary); margin-bottom: 1rem;">🔧 Visión Integral</h4>
+                    <p style="color: var(--text-light);">Comprensión holística de sistemas tecnológicos desde la electrónica básica hasta arquitecturas cloud complejas.</p>
+                </div>
+                
+                <div style="background: white; border: 2px solid var(--border); border-radius: 10px; padding: 1.5rem;">
+                    <h4 style="color: var(--primary); margin-bottom: 1rem;">📊 Análisis y Resolución</h4>
+                    <p style="color: var(--text-light);">Habilidad para analizar problemas complejos y diseñar soluciones técnicas efectivas basadas en datos.</p>
+                </div>
+                
+                <div style="background: white; border: 2px solid var(--border); border-radius: 10px; padding: 1.5rem;">
+                    <h4 style="color: var(--primary); margin-bottom: 1rem;">🚀 Adaptabilidad Tecnológica</h4>
+                    <p style="color: var(--text-light);">Experiencia transitando entre diferentes tecnologías y paradigmas de programación según las necesidades del proyecto.</p>
+                </div>
+                
+                <div style="background: white; border: 2px solid var(--border); border-radius: 10px; padding: 1.5rem;">
+                    <h4 style="color: var(--primary); margin-bottom: 1rem;">🎓 Excelencia Académica</h4>
+                    <p style="color: var(--text-light);">Calificaciones superiores en todas las titulaciones, demostrando seriedad y compromiso con la calidad.</p>
+                </div>
+                
+                <div style="background: white; border: 2px solid var(--border); border-radius: 10px; padding: 1.5rem;">
+                    <h4 style="color: var(--primary); margin-bottom: 1rem;">💼 Certificación Oficial</h4>
+                    <p style="color: var(--text-light);">Todas las competencias están oficialmente reconocidas por organismos educativos nacionales.</p>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <p style="font-size: 1.1rem; margin-bottom: 1rem;"><strong>Francisco Javier Boga Rioja</strong></p>
+            <p>Desarrollador Full Stack Java | Especialista en Automatización Industrial</p>
+            <p style="margin-top: 1rem;">📧 javier.boga@yahoo.es | 📱 640 609 402 | 📍 Madrid, España</p>
+            <p style="margin-top: 1.5rem; font-size: 0.9rem; opacity: 0.8;">
+                💼 <a href="https://www.linkedin.com/in/fco-javier-boga-rioja-technician/" target="_blank" style="color: var(--primary);">LinkedIn</a> | 
+                🌐 <a href="http://bogaservic.es:8080/wildfly/web/Index.html" target="_blank" style="color: var(--primary);">Portfolio Online</a>
+            </p>
+            <p style="margin-top: 2rem; padding-top: 1rem; border-top: 1px solid var(--border); font-size: 0.85rem;">
+                © 2026 Francisco Javier Boga Rioja. Documento actualizado en enero de 2026.
+            </p>
+        </footer>
+    </div>
+
+    <button class="print-button no-print" onclick="window.print()">
+        🖨️ Imprimir / Guardar PDF
+    </button>
+
+    <script>
+        // Efecto de aparición suave al cargar
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.certificate-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+    </script>
+</body>
+</html>
