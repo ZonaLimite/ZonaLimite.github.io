@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV - Francisco Javier Boga Rioja</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 0;
+        }
+
+        @media print {
+            body {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .page-break {
+                page-break-before: always;
+            }
+            .no-break {
+                page-break-inside: avoid;
+            }
+            .print-button {
+                display: none;
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1e40af;
+            --primary-light: #3b82f6;
+            --accent: #06b6d4;
+            --dark: #0f172a;
+            --text: #334155;
+            --text-light: #64748b;
+            --bg-light: #f1f5f9;
+            --border: #cbd5e1;
+        }
+
+        body {
+            font-family: 'Calibri', 'Segoe UI', Arial, sans-serif;
+            line-height: 1.5;
+            color: var(--text);
+            background: #f8fafc;
+            padding: 20px;
+        }
+
+        .cv-container {
+            width: 210mm;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        .page {
+            width: 210mm;
+            min-height: 297mm;
+            padding: 20mm;
+            background: white;
+            position: relative;
+        }
+
+        /* HEADER */
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: 25mm 20mm;
+            margin: -20mm -20mm 8mm -20mm;
+            position: relative;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .name {
+            font-size: 32pt;
+            font-weight: bold;
+            margin-bottom: 4mm;
+            letter-spacing: -0.5px;
+        }
+
+        .title {
+            font-size: 16pt;
+            margin-bottom: 5mm;
+            opacity: 0.95;
+            font-weight: 500;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3mm;
+            font-size: 10pt;
+            margin-top: 5mm;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 2mm;
+        }
+
+        .contact-icon {
+            font-weight: bold;
+        }
+
+        /* PERFIL SUMMARY */
+        .profile-summary {
+            background: var(--bg-light);
+            padding: 5mm;
+            border-left: 4px solid var(--primary);
+            margin-bottom: 8mm;
+            font-size: 10pt;
+            line-height: 1.6;
+        }
+
+        .profile-summary p {
+            margin-bottom: 3mm;
+        }
+
+        .profile-summary p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* SECCIONES */
+        .section {
+            margin-bottom: 8mm;
+        }
+
+        .section-title {
+            font-size: 14pt;
+            color: var(--primary);
+            font-weight: bold;
+            margin-bottom: 4mm;
+            padding-bottom: 2mm;
+            border-bottom: 2px solid var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* EXPERIENCIA */
+        .experience-item {
+            margin-bottom: 6mm;
+            page-break-inside: avoid;
+        }
+
+        .experience-header {
+            margin-bottom: 2mm;
+        }
+
+        .job-title {
+            font-size: 11pt;
+            font-weight: bold;
+            color: var(--dark);
+            margin-bottom: 1mm;
+        }
+
+        .company {
+            font-size: 10pt;
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 1mm;
+        }
+
+        .period {
+            font-size: 9pt;
+            color: var(--text-light);
+            font-weight: 600;
+            display: inline-block;
+            background: var(--bg-light);
+            padding: 1mm 3mm;
+            border-radius: 2mm;
+            margin-bottom: 2mm;
+        }
+
+        .experience-description {
+            font-size: 9.5pt;
+            line-height: 1.5;
+            margin-left: 4mm;
+        }
+
+        .experience-description ul {
+            margin-top: 2mm;
+            margin-left: 5mm;
+        }
+
+        .experience-description li {
+            margin-bottom: 1.5mm;
+        }
+
+        /* HABILIDADES */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4mm;
+        }
+
+        .skill-category {
+            page-break-inside: avoid;
+            margin-bottom: 3mm;
+        }
+
+        .skill-category-title {
+            font-size: 10pt;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 2mm;
+            display: flex;
+            align-items: center;
+            gap: 2mm;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2mm;
+        }
+
+        .skill-tag {
+            background: var(--bg-light);
+            padding: 1.5mm 3mm;
+            border-radius: 2mm;
+            font-size: 8.5pt;
+            border: 1px solid var(--border);
+            display: inline-block;
+        }
+
+        /* FORMACIÓN */
+        .education-item {
+            margin-bottom: 5mm;
+            page-break-inside: avoid;
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 4mm;
+        }
+
+        .education-year {
+            font-size: 9pt;
+            font-weight: bold;
+            color: var(--primary);
+            min-width: 25mm;
+        }
+
+        .education-content h3 {
+            font-size: 10pt;
+            font-weight: bold;
+            color: var(--dark);
+            margin-bottom: 1mm;
+        }
+
+        .education-institution {
+            font-size: 9pt;
+            color: var(--text-light);
+            margin-bottom: 1mm;
+        }
+
+        .education-grade {
+            font-size: 8.5pt;
+            background: #dcfce7;
+            color: #166534;
+            padding: 1mm 2mm;
+            border-radius: 2mm;
+            display: inline-block;
+            font-weight: 600;
+        }
+
+        /* STATS BOX */
+        .stats-box {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            padding: 4mm;
+            border-radius: 3mm;
+            margin-bottom: 8mm;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3mm;
+            text-align: center;
+        }
+
+        .stat-item {
+            page-break-inside: avoid;
+        }
+
+        .stat-number {
+            font-size: 18pt;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 1mm;
+        }
+
+        .stat-label {
+            font-size: 8pt;
+            opacity: 0.95;
+        }
+
+        /* PROYECTOS */
+        .project-item {
+            margin-bottom: 5mm;
+            page-break-inside: avoid;
+            border-left: 3px solid var(--accent);
+            padding-left: 4mm;
+        }
+
+        .project-title {
+            font-size: 10pt;
+            font-weight: bold;
+            color: var(--dark);
+            margin-bottom: 1mm;
+        }
+
+        .project-tech {
+            font-size: 8.5pt;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 2mm;
+        }
+
+        .project-description {
+            font-size: 9pt;
+            line-height: 1.5;
+        }
+
+        /* FOOTER */
+        .page-footer {
+            position: absolute;
+            bottom: 15mm;
+            left: 20mm;
+            right: 20mm;
+            text-align: center;
+            font-size: 8pt;
+            color: var(--text-light);
+            padding-top: 3mm;
+            border-top: 1px solid var(--border);
+        }
+
+        /* PRINT BUTTON */
+        .print-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 14pt;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(30, 64, 175, 0.4);
+            z-index: 1000;
+            transition: all 0.3s;
+        }
+
+        .print-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(30, 64, 175, 0.5);
+        }
+
+        /* HIGHLIGHTS */
+        .highlight-box {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 3mm;
+            margin: 3mm 0;
+            font-size: 9pt;
+            page-break-inside: avoid;
+        }
+
+        .highlight-box strong {
+            color: #92400e;
+        }
+
+        /* TWO COLUMN LAYOUT */
+        .two-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5mm;
+        }
+
+        .column {
+            page-break-inside: avoid;
+        }
+    </style>
+</head>
+<body>
+    <div class="cv-container">
+        <!-- PÁGINA 1 -->
+        <div class="page">
+            <!-- HEADER -->
+            <div class="header">
+                <div class="header-content">
+                    <div class="name">Francisco Javier Boga Rioja</div>
+                    <div class="title">Desarrollador Full Stack Java | Especialista en Automatización Industrial</div>
+                    <div class="contact-grid">
+                        <div class="contact-item">
+                            <span class="contact-icon">📧</span>
+                            <span>javier.boga@yahoo.es</span>
+                        </div>
+                        <div class="contact-item">
+                            <span class="contact-icon">📱</span>
+                            <span>640 609 402 (preferente)</span>
+                        </div>
+                        <div class="contact-item">
+                            <span class="contact-icon">📍</span>
+                            <span>Miraflores de la Sierra, Madrid</span>
+                        </div>
+                        <div class="contact-item">
+                            <span class="contact-icon">💼</span>
+                            <span>LinkedIn: fco-javier-boga-rioja-technician</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PERFIL PROFESIONAL -->
+            <div class="profile-summary no-break">
+                <p><strong>Desarrollador Full Stack Java</strong> con más de <strong>36 años de experiencia profesional</strong> combinando desarrollo de software, administración de sistemas y automatización industrial. Especializado en <strong>Spring Boot, microservicios, arquitecturas cloud</strong> y tecnologías Java modernas.</p>
+                <p>Mi trayectoria única me permite aportar una <strong>visión integral de sistemas complejos</strong>, desde la capa física de automatización hasta arquitecturas de software escalables. Comprometido con el aprendizaje continuo: <strong>DAM (2024), ASIR (2022)</strong>, actualmente cursando <strong>especialización en IA y Big Data</strong>.</p>
+                <p><strong>Objetivo:</strong> Consolidar mi carrera en desarrollo de software, aportando mi experiencia técnica única en proyectos desafiantes con tecnologías modernas (microservicios, cloud, IoT, Industry 4.0).</p>
+            </div>
+
+            <!-- ESTADÍSTICAS CLAVE -->
+            <div class="stats-box no-break">
+                <div class="stat-item">
+                    <span class="stat-number">36+</span>
+                    <span class="stat-label">Años de<br>Experiencia</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">5+</span>
+                    <span class="stat-label">Años en<br>Java Full Stack</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">3</span>
+                    <span class="stat-label">Titulaciones<br>Superiores</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">20+</span>
+                    <span class="stat-label">Tecnologías<br>Dominadas</span>
+                </div>
+            </div>
+
+            <!-- EXPERIENCIA PROFESIONAL -->
+            <div class="section">
+                <h2 class="section-title">Experiencia Profesional</h2>
+
+                <div class="experience-item no-break">
+                    <div class="experience-header">
+                        <div class="job-title">Programador Java Full Stack</div>
+                        <div class="company">Dominion Industry & Infrastructures</div>
+                        <div class="period">Junio 2020 - Actualidad | 30.000€ - 39.000€ bruto/año</div>
+                    </div>
+                    <div class="experience-description">
+                        <p><strong>Rol:</strong> Especialista con 1-5 personas a cargo, desarrollo de soluciones empresariales</p>
+                        <ul>
+                            <li><strong>Backend:</strong> Desarrollo Java EE/Jakarta, Spring Boot, microservicios RESTful, WebSockets</li>
+                            <li><strong>APIs:</strong> Documentación con Swagger/OpenAPI, controllers HTTP</li>
+                            <li><strong>Persistencia:</strong> JPA/Hibernate, Spring Data, JDBC con bases de datos SQL/NoSQL</li>
+                            <li><strong>Seguridad:</strong> OAuth 2.0, JWT, KeyCloak, API Gateway, Spring Security</li>
+                            <li><strong>Mensajería:</strong> JMS, RabbitMQ, Kafka (síncrona y asíncrona), gRPC</li>
+                            <li><strong>Cloud & DevOps:</strong> AWS, Azure, OpenShift, Google Cloud, Docker, Jenkins, Maven</li>
+                            <li><strong>Frontend:</strong> Angular, React, HTML5, JavaScript/TypeScript, Thymeleaf</li>
+                            <li><strong>Patrones:</strong> Arquitectura Hexagonal, DDD, SOLID, microservicios, service discovery</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="experience-item no-break">
+                    <div class="experience-header">
+                        <div class="job-title">Desarrollador/Mantenedor de Aplicaciones - Automatización Industrial</div>
+                        <div class="company">Dominion Industry & Infrastructures</div>
+                        <div class="period">Mayo 2016 - Junio 2020 | 30.000€ - 33.000€ bruto/año</div>
+                    </div>
+                    <div class="experience-description">
+                        <ul>
+                            <li><strong>Desarrollo:</strong> Herramientas de diagnóstico y monitorización para optimización del mantenimiento</li>
+                            <li><strong>Aplicativos web:</strong> Sistemas intranet para gestión de información estadística de producción</li>
+                            <li><strong>Dashboards:</strong> Cuadros de mando, informes estadísticos, herramientas de análisis</li>
+                            <li><strong>Soporte:</strong> Hot Line de líneas de automatización, mantenimiento de sistemas</li>
+                            <li><strong>Stack:</strong> JavaScript, XML, Java, Ajax, JSON, MySQL, jQuery, SQL</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="page-footer">
+                Francisco Javier Boga Rioja | Desarrollador Full Stack Java | Página 1 de 4
+            </div>
+        </div>
+
+        <!-- PÁGINA 2 -->
+        <div class="page page-break">
+            <div class="section">
+                <h2 class="section-title">Experiencia Profesional (continuación)</h2>
+
+                <div class="experience-item no-break">
+                    <div class="experience-header">
+                        <div class="job-title">Técnico de Sistemas - Jefe de Equipo</div>
+                        <div class="company">Dominion Industry & Infrastructures · Ingeniería</div>
+                        <div class="period">Enero 2015 - Mayo 2016 | 30.000€ bruto/año</div>
+                    </div>
+                    <div class="experience-description">
+                        <ul>
+                            <li>Gestión y coordinación de equipos de mantenimiento de instalaciones automatizadas</li>
+                            <li>Supervisión de tareas preventivas, correctivas, predictivas y casuísticas</li>
+                            <li>Mantenimiento y supervisión de sistemas implantados</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="experience-item no-break">
+                    <div class="experience-header">
+                        <div class="job-title">Analista / Programador</div>
+                        <div class="company">Abantia · Programación, Consultoría IT</div>
+                        <div class="period">Febrero 2004 - Diciembre 2004 | 26.000€ - 33.000€ bruto/año</div>
+                    </div>
+                    <div class="experience-description">
+                        <p><strong>Proyecto:</strong> Portal corporativo intranet para Correos (arquitectura MVC tres capas)</p>
+                        <ul>
+                            <li><strong>Presentación:</strong> HTML, JavaScript, CSS, JSP</li>
+                            <li><strong>Lógica de negocio:</strong> Java (definición de clases y escenarios de uso)</li>
+                            <li><strong>Persistencia:</strong> SQL Server con procedimientos almacenados</li>
+                            <li><strong>Infraestructura:</strong> Administración SQL Server, servidor Apache + JRUN (contenedor servlets)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="experience-item no-break">
+                    <div class="experience-header">
+                        <div class="job-title">Técnico de Sistemas - Jefe de Equipo</div>
+                        <div class="company">Dominion Industry & Infrastructures · Telecomunicaciones</div>
+                        <div class="period">Enero 2001 - Diciembre 2003 | 21.000€ - 30.000€ bruto/año</div>
+                    </div>
+                    <div class="experience-description">
+                        <ul>
+                            <li>Mantenimiento de instalaciones automatizadas</li>
+                            <li>Coordinación y supervisión de equipos técnicos</li>
+                            <li>Supervisión de sistemas implantados</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="experience-item no-break">
+                    <div class="experience-header">
+                        <div class="job-title">Jefe de Turno</div>
+                        <div class="company">SDP · Maquinaria (Sociedad Estatal de Correos y Telégrafos)</div>
+                        <div class="period">Febrero 1988 - Diciembre 2000 | 18.000€ - 21.000€ bruto/año</div>
+                    </div>
+                    <div class="experience-description">
+                        <ul>
+                            <li>Puesta a punto de maquinaria industrial automatizada</li>
+                            <li>Sistemas de automatización de clasificación automática de correspondencia</li>
+                            <li>Mantenimiento de equipos de clasificación postal</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PROYECTOS DESTACADOS -->
+            <div class="section no-break">
+                <h2 class="section-title">Proyectos Destacados</h2>
+
+                <div class="project-item">
+                    <div class="project-title">Sistema Informativo Maquinaria de Clasificación TOP 2000</div>
+                    <div class="project-tech">Proyecto Final DAM 2024 | Spring Boot 3.2.4 + Angular 17</div>
+                    <div class="project-description">
+                        Aplicación web SPA completa para visualización de dashboards, gráficas dinámicas y monitorización en tiempo real de maquinaria postal. <strong>Backend:</strong> Java 17, Spring Boot, APIs RESTful, JDBC. <strong>Frontend:</strong> Angular, TypeScript, WebSockets (STOMP), ngx-charts. <strong>Características:</strong> Sistema de diagnóstico en tiempo real, chat integrado, interface remota portátil. <strong>Repositorios:</strong> github.com/ZonaLimite
+                    </div>
+                </div>
+
+                <div class="project-item">
+                    <div class="project-title">Suite de Herramientas de Diagnóstico Industrial</div>
+                    <div class="project-tech">Producción | Correos España</div>
+                    <div class="project-description">
+                        Desarrollo de múltiples herramientas: monitorización experta, aplicativos intranet para estadísticas, cuadros de mando personalizados, constructores de mapas de clasificación. <strong>Impacto:</strong> Reducción significativa del tiempo de detección y resolución de averías.
+                    </div>
+                </div>
+            </div>
+
+            <div class="page-footer">
+                Francisco Javier Boga Rioja | Desarrollador Full Stack Java | Página 2 de 4
+            </div>
+        </div>
+
+        <!-- PÁGINA 3 -->
+        <div class="page page-break">
+            <!-- HABILIDADES TÉCNICAS -->
+            <div class="section">
+                <h2 class="section-title">Stack Tecnológico y Competencias</h2>
+
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <div class="skill-category-title">☕ Backend & Frameworks</div>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Java SE/EE (8-17)</span>
+                            <span class="skill-tag">Spring Boot</span>
+                            <span class="skill-tag">Spring MVC</span>
+                            <span class="skill-tag">Spring Security</span>
+                            <span class="skill-tag">Spring Data</span>
+                            <span class="skill-tag">Spring Cloud</span>
+                            <span class="skill-tag">Hibernate/JPA</span>
+                            <span class="skill-tag">RESTful APIs</span>
+                            <span class="skill-tag">Microservicios</span>
+                            <span class="skill-tag">WebSockets</span>
+                            <span class="skill-tag">Jakarta EE</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <div class="skill-category-title">🎨 Frontend</div>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Angular</span>
+                            <span class="skill-tag">React</span>
+                            <span class="skill-tag">TypeScript</span>
+                            <span class="skill-tag">JavaScript</span>
+                            <span class="skill-tag">HTML5/CSS3</span>
+                            <span class="skill-tag">jQuery</span>
+                            <span class="skill-tag">Bootstrap</span>
+                            <span class="skill-tag">Thymeleaf</span>
+                            <span class="skill-tag">JSP/JSF</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <div class="skill-category-title">🗄️ Bases de Datos</div>
+                        <div class="skill-tags">
+                            <span class="skill-tag">MySQL/MariaDB</span>
+                            <span class="skill-tag">PostgreSQL</span>
+                            <span class="skill-tag">Oracle</span>
+                            <span class="skill-tag">SQL Server</span>
+                            <span class="skill-tag">MongoDB</span>
+                            <span class="skill-tag">PL/SQL</span>
+                            <span class="skill-tag">JDBC</span>
+                            <span class="skill-tag">JPA</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <div class="skill-category-title">☁️ Cloud & DevOps</div>
+                        <div class="skill-tags">
+                            <span class="skill-tag">AWS</span>
+                            <span class="skill-tag">Azure</span>
+                            <span class="skill-tag">Google Cloud</span>
+                            <span class="skill-tag">OpenShift</span>
+                            <span class="skill-tag">Heroku</span>
+                            <span class="skill-tag">Docker</span>
+                            <span class="skill-tag">Kubernetes</span>
+                            <span class="skill-tag">Jenkins</span>
+                            <span class="skill-tag">Git/GitHub</span>
+                            <span class="skill-tag">Maven</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <div class="skill-category-title">🔄 Mensajería & Eventos</div>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Kafka</span>
+                            <span class="skill-tag">RabbitMQ</span>
+                            <span class="skill-tag">JMS</span>
+                            <span class="skill-tag">AMQP</span>
+                            <span class="skill-tag">gRPC</span>
+                            <span class="skill-tag">STOMP</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <div class="skill-category-title">🔐 Seguridad</div>
+                        <div class="skill-tags">
+                            <span class="skill-tag">OAuth 2.0</span>
+                            <span class="skill-tag">JWT</span>
+                            <span class="skill-tag">KeyCloak</span>
+                            <span class="skill-tag">Spring Security</span>
+                            <span class="skill-tag">API Gateway</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <div class="skill-category-title">💻 Sistemas & Redes</div>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Linux Server</span>
+                            <span class="skill-tag">Windows Server</span>
+                            <span class="skill-tag">Networking (CCNA)</span>
+                            <span class="skill-tag">VMware</span>
+                            <span class="skill-tag">Virtualización</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <div class="skill-category-title">🛠️ Herramientas & IDEs</div>
+                        <div class="skill-tags">
+                            <span class="skill-tag">IntelliJ IDEA</span>
+                            <span class="skill-tag">Eclipse</span>
+                            <span class="skill-tag">VS Code</span>
+                            <span class="skill-tag">NetBeans</span>
+                            <span class="skill-tag">Android Studio</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- METODOLOGÍAS Y PRÁCTICAS -->
+            <div class="section no-break">
+                <h2 class="section-title">Metodologías y Buenas Prácticas</h2>
+                <div class="skill-tags" style="margin-top: 3mm;">
+                    <span class="skill-tag">Arquitectura Hexagonal</span>
+                    <span class="skill-tag">DDD (Domain Driven Design)</span>
+                    <span class="skill-tag">SOLID</span>
+                    <span class="skill-tag">Clean Code</span>
+                    <span class="skill-tag">Test Unitarios (JUnit)</span>
+                    <span class="skill-tag">TDD</span>
+                    <span class="skill-tag">CI/CD</span>
+                    <span class="skill-tag">Scrum/Agile</span>
+                    <span class="skill-tag">Git Flow</span>
+                    <span class="skill-tag">Code Review</span>
+                    <span class="skill-tag">SonarQube</span>
+                    <span class="skill-tag">Swagger/OpenAPI</span>
+                </div>
+            </div>
+
+            <!-- COMPETENCIAS ADICIONALES -->
+            <div class="section no-break">
+                <h2 class="section-title">Competencias Adicionales</h2>
+                <div class="two-columns">
+                    <div class="column">
+                        <p style="font-size: 9.5pt; line-height: 1.5;"><strong>🎯 Resolución de Problemas:</strong> Más de 20 años diagnosticando y resolviendo problemas críticos en sistemas de producción. Capacidad excepcional para troubleshooting avanzado.</p>
+                        <p style="font-size: 9.5pt; line-height: 1.5; margin-top: 2mm;"><strong>📊 Visión Integral:</strong> Experiencia única combinando hardware, software, redes y sistemas empresariales. Comprensión holística de arquitecturas complejas.</p>
+                        <p style="font-size: 9.5pt; line-height: 1.5; margin-top: 2mm;"><strong>🔧 IoT & Industry 4.0:</strong> Conocimiento profundo de integración entre sistemas físicos y digitales. Ideal para proyectos de automatización y robótica industrial.</p>
+                    </div>
+                    <div class="column">
+                        <p style="font-size: 9.5pt; line-height: 1.5;"><strong>📚 Aprendizaje Continuo:</strong> Compromiso demostrado con la actualización constante. Tres titulaciones oficiales en los últimos 4 años.</p>
+                        <p style="font-size: 9.5pt; line-height: 1.5; margin-top: 2mm;"><strong>👥 Trabajo en Equipo:</strong> Experiencia liderando equipos técnicos y coordinando con departamentos multidisciplinares.</p>
+                        <p style="font-size: 9.5pt; line-height: 1.5; margin-top: 2mm;"><strong>🌐 Inglés Técnico:</strong> Nivel alto de lectura de documentación técnica y nivel intermedio conversacional.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="page-footer">
+                Francisco Javier Boga Rioja | Desarrollador Full Stack Java | Página 3 de 4
+            </div>
+        </div>
+
+        <!-- PÁGINA 4 -->
+        <div class="page page-break">
+            <!-- FORMACIÓN ACADÉMICA -->
+            <div class="section">
+                <h2 class="section-title">Formación Académica</h2>
+
+                <div class="education-item">
+                    <div class="education-year">2024<br>En curso</div>
+                    <div class="education-content">
+                        <h3>Curso de Especialización en Inteligencia Artificial y Big Data (IABD)</h3>
+                        <div class="education-institution">CIERD-CIDEAD - Grado Superior Oficial</div>
+                        <div style="margin-top: 2mm; font-size: 9pt;">
+                            Especialización oficial en Machine Learning, Deep Learning, procesamiento Big Data (Hadoop, Spark), Python Data Science, modelos de IA y análisis predictivo.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="education-item">
+                    <div class="education-year">2022-2024</div>
+                    <div class="education-content">
+                        <h3>Técnico Superior en Desarrollo de Aplicaciones Multiplataforma (DAM)</h3>
+                        <div class="education-institution">CIDEAD - Centro Integrado de Enseñanzas a Distancia</div>
+                        <div class="education-grade">Calificación: 7.46/10</div>
+                        <div style="margin-top: 2mm; font-size: 9pt;">
+                            2000 horas. Módulos: Programación (Java), Desarrollo de interfaces, Acceso a datos (JPA/Hibernate), Programación multimedia y móvil (Android), Servicios y procesos, Sistemas de gestión empresarial, Bases de datos.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="education-item">
+                    <div class="education-year">2020-2022</div>
+                    <div class="education-content">
+                        <h3>Técnico Superior en Administración de Sistemas Informáticos en Red (ASIR)</h3>
+                        <div class="education-institution">IES CIFP Ignacio Ellacuría - EducaMadrid</div>
+                        <div class="education-grade">Calificación: 9.07/10 ⭐ Matrícula de Honor</div>
+                        <div style="margin-top: 2mm; font-size: 9pt;">
+                            2000 horas. Administración Linux/Windows Server, redes, seguridad, virtualización, bases de datos, alta disponibilidad, implantación de aplicaciones web.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="education-item">
+                    <div class="education-year">2008</div>
+                    <div class="education-content">
+                        <h3>Máster en Automatización Industrial</h3>
+                        <div class="education-institution">InterGrupo</div>
+                    </div>
+                </div>
+
+                <div class="education-item">
+                    <div class="education-year">2000-2001</div>
+                    <div class="education-content">
+                        <h3>Máster en Programación Internet-Intranet JAVA</h3>
+                        <div class="education-institution">INFO-92</div>
+                    </div>
+                </div>
+
+                <div class="education-item">
+                    <div class="education-year">1987-1990</div>
+                    <div class="education-content">
+                        <h3>Bachillerato</h3>
+                        <div class="education-institution">Instituto Bachillerato Simancas</div>
+                    </div>
+                </div>
+
+                <div class="education-item">
+                    <div class="education-year">1980-1982</div>
+                    <div class="education-content">
+                        <h3>FP Grado Medio - Electricidad y Electrónica</h3>
+                        <div class="education-institution">Escuela de Transmisiones de Cuatro Vientos (Ejército del Aire)</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CERTIFICACIONES -->
+            <div class="section no-break">
+                <h2 class="section-title">Certificaciones Profesionales</h2>
+                
+                <div style="display: grid; gap: 3mm;">
+                    <div style="font-size: 9pt; padding: 2mm; background: var(--bg-light); border-radius: 2mm;">
+                        <strong>📊 Data Warehouse & Business Intelligence</strong> - 40h (2021)<br>
+                        <span style="color: var(--text-light);">Centro Cultural y Deportivo Tajamar | ETL, OLAP, minería de datos</span>
+                    </div>
+                    
+                    <div style="font-size: 9pt; padding: 2mm; background: var(--bg-light); border-radius: 2mm;">
+                        <strong>☁️ Cloud Computing (Azure, Linux)</strong> - 30h (2021)<br>
+                        <span style="color: var(--text-light);">Centro Cultural y Deportivo Tajamar | Virtualización, servicios cloud</span>
+                    </div>
+                    
+                    <div style="font-size: 9pt; padding: 2mm; background: var(--bg-light); border-radius: 2mm;">
+                        <strong>📈 Big Data</strong> - 40h (2021)<br>
+                        <span style="color: var(--text-light);">Centro Cultural y Deportivo Tajamar | Analítica avanzada, procesamiento datos</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- INFORMACIÓN ADICIONAL -->
+            <div class="section no-break">
+                <h2 class="section-title">Información Adicional</h2>
+                
+                <div class="two-columns">
+                    <div class="column">
+                        <p style="font-size: 9.5pt; margin-bottom: 2mm;"><strong>📍 Situación Laboral</strong></p>
+                        <p style="font-size: 9pt; color: var(--text-light); line-height: 1.4;">
+                            Empleado actualmente<br>
+                            Abierto a ofertas interesantes<br>
+                            Motivo: Transición definitiva a desarrollo
+                        </p>
+                        
+                        <p style="font-size: 9.5pt; margin-bottom: 2mm; margin-top: 4mm;"><strong>💰 Expectativas Salariales</strong></p>
+                        <p style="font-size: 9pt; color: var(--text-light); line-height: 1.4;">
+                            Mínimo: 38.000€ bruto/año<br>
+                            Objetivo: 42.000€ bruto/año<br>
+                            (Negociable según proyecto)
+                        </p>
+                        
+                        <p style="font-size: 9.5pt; margin-bottom: 2mm; margin-top: 4mm;"><strong>🚗 Movilidad</strong></p>
+                        <p style="font-size: 9pt; color: var(--text-light); line-height: 1.4;">
+                            Vehículo propio: Sí<br>
+                            Permisos: B, C, D (todos + remolques)<br>
+                            Disponibilidad viajar: Sí (según condiciones)<br>
+                            Cambio residencia: Sí (según condiciones)
+                        </p>
+                    </div>
+                    
+                    <div class="column">
+                        <p style="font-size: 9.5pt; margin-bottom: 2mm;"><strong>🎯 Preferencias Laborales</strong></p>
+                        <p style="font-size: 9pt; color: var(--text-light); line-height: 1.4;">
+                            Puesto: Desarrollador Full Stack<br>
+                            Contrato: Indefinido (preferente)<br>
+                            Jornada: Indiferente<br>
+                            Ubicación preferida: Madrid
+                        </p>
+                        
+                        <p style="font-size: 9.5pt; margin-bottom: 2mm; margin-top: 4mm;"><strong>🌍 Idiomas</strong></p>
+                        <p style="font-size: 9pt; color: var(--text-light); line-height: 1.4;">
+                            <strong>Español:</strong> Nativo<br>
+                            <strong>Inglés:</strong> Intermedio<br>
+                            (Alto nivel lectura técnica)
+                        </p>
+                        
+                        <p style="font-size: 9.5pt; margin-bottom: 2mm; margin-top: 4mm;"><strong>📂 Portfolio & Enlaces</strong></p>
+                        <p style="font-size: 9pt; color: var(--text-light); line-height: 1.4;">
+                            <a href="https://zonalimite.github.io/" target="_blank">🌐 zonalimite.github.io/</a><br>
+                            <a href="https://github.com/ZonaLimite" target="_blank">💻 github.com/ZonaLimite</a><br>
+                            <a href="https://www.linkedin.com/in/fco-javier-boga-rioja-technician" target="_blank">💼 linkedin.com/in/fco-javier-boga-rioja</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PROPUESTA DE VALOR -->
+            <div class="highlight-box no-break">
+                <p style="margin-bottom: 2mm;"><strong>Mi Propuesta de Valor Única</strong></p>
+                <p style="font-size: 9pt; line-height: 1.5;">
+                    Aporto una <strong>visión 360° de sistemas tecnológicos</strong> que pocos desarrolladores poseen. Mi experiencia en automatización industrial me proporciona capacidades excepcionales de troubleshooting, comprensión de sistemas complejos y mentalidad DevOps natural. Esta combinación es especialmente valiosa en proyectos <strong>IoT, Industry 4.0, sistemas críticos</strong> y arquitecturas empresariales donde se requiera integración entre el mundo físico y digital.
+                </p>
+                <p style="font-size: 9pt; line-height: 1.5; margin-top: 2mm;">
+                    Busco consolidar mi carrera en <strong>desarrollo de software</strong>, aplicando mi experiencia única en proyectos desafiantes con tecnologías modernas. Mi compromiso con el aprendizaje continuo queda demostrado con <strong>3 titulaciones oficiales recientes</strong> y formación constante en tecnologías emergentes.
+                </p>
+            </div>
+
+            <!-- REFERENCIAS -->
+            <div style="margin-top: 6mm; padding: 3mm; border: 1px solid var(--border); border-radius: 2mm; font-size: 9pt; text-align: center; color: var(--text-light);">
+                <strong>Referencias profesionales disponibles bajo petición</strong>
+            </div>
+
+            <div class="page-footer">
+                Francisco Javier Boga Rioja | Desarrollador Full Stack Java | Página 4 de 4
+            </div>
+        </div>
+    </div>
+
+    <button class="print-button" onclick="window.print()">
+        🖨️ Generar PDF
+    </button>
+
+    <script>
+        // Auto-ajuste de altura de páginas
+        document.addEventListener('DOMContentLoaded', function() {
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => {
+                const content = page.querySelector('.section:last-child');
+                if (content) {
+                    const rect = content.getBoundingClientRect();
+                    const pageRect = page.getBoundingClientRect();
+                    if (rect.bottom > pageRect.bottom - 60) {
+                        console.warn('Contenido excede el límite de la página');
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
